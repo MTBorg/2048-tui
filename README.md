@@ -14,4 +14,10 @@ Simply run
 `make`
 for release and
 `make debug`
-for debug.
+for debug,
+or `sudo make install` to install it to your path (/usr/bin).
+
+### Uninstalling
+
+If you have installed into your path, you can uninstall it by running
+`sudo make uninstall`.
