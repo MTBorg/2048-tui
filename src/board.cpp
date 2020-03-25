@@ -1,69 +1,6 @@
-#include <ncurses.h>
-#include <string>
-#include <array>
-#include <cstdlib>
+#include "board.h"
 #include <ctime>
-
-static const int SQUARE_SIZE = 10;
-static const int BOARD_SIZE = 4;
-
-class Square
-{
-public:
-	Square():m_window(nullptr), m_value(0){}
-	Square(int x, int y, int value);
-	Square& operator=(Square&& s);
-	void draw() const;
-	inline void setValue(int value){m_value = value;}
-	inline int getValue(){return m_value;}
-	inline void operator*=(int n){m_value *= 2;}
-
-	virtual ~Square();
-
-private:
-	WINDOW* m_window;
-	int m_value;
-};
-
-Square::Square(int x, int y, int value): m_value(value){
-	m_window = newwin(SQUARE_SIZE, SQUARE_SIZE, y, x);
-	box(m_window, 0, 0);
-}
-
-Square& Square::operator=(Square&& s){
-	this->m_window = s.m_window;
-	this->m_value = s.m_value;
-	s.m_window = nullptr;
-
-	return *this;
-}
-
-void Square::draw() const{
-	werase(m_window);
-	box(m_window, 0, 0);
-	mvwprintw(m_window, SQUARE_SIZE / 2, SQUARE_SIZE / 2, m_value == 0 ? "    " : std::to_string(m_value).c_str());
-	wrefresh(m_window);
-}
-
-Square::~Square(){
-	if(m_window != nullptr)
-		delwin(m_window);
-}
-
-class Board
-{
-public:
-	Board ();
-	void draw() const;
-	void swipeLeft();
-	void swipeRight();
-	void swipeUp();
-	void swipeDown();
-	void insertRandom();
-
-private:
-	std::array<std::array<Square, BOARD_SIZE>, BOARD_SIZE> m_squares;
-};
+#include <cstdlib>
 
 Board::Board(){
 	for (int x = 0; x < BOARD_SIZE; ++x) {
@@ -125,6 +62,7 @@ void Board::swipeLeft(){
 		}
 	}
 }
+
 
 void Board::swipeRight(){
 	//Combine values
@@ -242,41 +180,4 @@ void Board::insertRandom(){
 	}while(m_squares[x][y].getValue() != 0);
 
 	m_squares[x][y].setValue(2);
-}
-
-
-int main(int argc, char *argv[]) {
-	initscr();
-	cbreak();
-	keypad(stdscr, TRUE);
-	refresh();
-
-	Board b;
-	b.draw();
-
-	int ch;
-
-	while((ch = getch()) != KEY_F(1)){	
-		switch(ch){
-			case KEY_LEFT:
-				b.swipeLeft();
-				break;
-			case KEY_RIGHT:
-				b.swipeRight();
-				break;
-			case KEY_UP:
-				b.swipeUp();
-				break;
-			case KEY_DOWN:
-				b.swipeDown();
-				break;	
-			case KEY_BACKSPACE:
-				break;
-		}
-		b.insertRandom();
-		b.draw();
-	}
-
-	endwin();
-	return 0;
 }
