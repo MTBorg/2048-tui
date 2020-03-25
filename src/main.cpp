@@ -34,8 +34,15 @@ int main(int argc, char *argv[]) {
 		}
 		b.insertRandom();
 		b.draw();
+		if(b.hasWinningState()){
+			erase();
+			printw("You won!\nPress any key to exit...");
+			getch(); //Wait for user input
+			goto END_GAME;
+		}
 	}
 
+END_GAME:
 	endwin();
 	return 0;
 }

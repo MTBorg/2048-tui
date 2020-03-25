@@ -16,6 +16,7 @@ public:
 	void swipeUp();
 	void swipeDown();
 	void insertRandom();
+	bool hasWinningState() const;
 
 private:
 	std::array<std::array<Square, BOARD_SIZE>, BOARD_SIZE> m_squares;

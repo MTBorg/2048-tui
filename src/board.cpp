@@ -181,3 +181,13 @@ void Board::insertRandom(){
 
 	m_squares[x][y].setValue(2);
 }
+
+bool Board::hasWinningState() const{
+	for(const auto& column: m_squares){
+		for (const auto& square : column) {
+			if(square.getValue() == 2048)
+				return true;
+		}
+	}
+	return false;
+}

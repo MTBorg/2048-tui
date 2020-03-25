@@ -11,7 +11,7 @@ public:
 	Square& operator=(Square&& s);
 	void draw() const;
 	inline void setValue(int value){m_value = value;}
-	inline int getValue(){return m_value;}
+	inline int getValue() const{return m_value;}
 	inline void operator*=(int n){m_value *= 2;}
 
 	virtual ~Square();
