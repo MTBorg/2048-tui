@@ -1,5 +1,5 @@
 GXX = g++
-CXXFLAGS = --std=c++17
+CXXFLAGS = --std=c++17 -Wall
 CXXFLAGS_RELEASE = -O3
 CXXFLAGS_DEBUG = -g
 INCLUDES = -Iinclude

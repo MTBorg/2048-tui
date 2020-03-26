@@ -48,7 +48,6 @@ void Board::swipeLeft(){
 
 	// Float values left
 	for (int y = 0; y < BOARD_SIZE; ++y) {
-		int lastEmpty = 0;
 		for (int x = 1; x < BOARD_SIZE; ++x) {
 			if(m_squares[x][y].getValue() != 0){
 				for (int i = 0; i < x; ++i) {
@@ -84,7 +83,6 @@ void Board::swipeRight(){
 
 	// Float values right
 	for (int y = 0; y < BOARD_SIZE; ++y) {
-		int lastEmpty = 0;
 		for (int x = BOARD_SIZE - 2; x >= 0; --x) {
 			if(m_squares[x][y].getValue() != 0){
 				for (int i = BOARD_SIZE-1; i > x; --i) {
@@ -120,7 +118,6 @@ void Board::swipeUp(){
 
 	// Float values up
 	for (int x = 0; x < BOARD_SIZE; ++x) {
-		int lastEmpty = 0;
 		for (int y = 1; y < BOARD_SIZE; ++y) {
 			if(m_squares[x][y].getValue() != 0){
 				for (int i = 0; i < y; ++i) {
@@ -156,7 +153,6 @@ void Board::swipeDown(){
 
 	// Float values down
 	for (int x = 0; x < BOARD_SIZE; ++x) {
-		int lastEmpty = 0;
 		for (int y = BOARD_SIZE-2; y >= 0; --y) {
 			if(m_squares[x][y].getValue() != 0){
 				for (int i = BOARD_SIZE-1; i > y; --i) {
