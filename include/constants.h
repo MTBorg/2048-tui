@@ -1,7 +1,7 @@
 #ifndef CONSTANTS
 #define CONSTANTS
 
-static const int SQUARE_SIZE = 10;
-static const int BOARD_SIZE = 4;
+inline constexpr int SQUARE_SIZE = 10;
+inline constexpr int BOARD_SIZE = 4;
 
 #endif /* ifndef CONSTANTS */
